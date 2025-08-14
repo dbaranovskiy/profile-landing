@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handy Dandy - Your Home Project Partner</title>
+    <style>
+        /* CSS Reset and Global Styles */
+        :root {
+            /* Harmonized color scheme for an industrial/professional look */
+            --primary-color: #34495E; /* Strong Slate Blue */
+            --secondary-color: #F39C12; /* Vibrant Orange/Yellow for CTAs */
+            --dark-color: #2C3E50; /* Dark Slate for text */
+            --light-color: #ECF0F1; /* Light Grey for backgrounds */
+            --white-color: #FFFFFF;
+            --menu-fallback-bg: #424242; /* Fallback for diamond plate texture */
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--white-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            padding-bottom: 70px;
+        }
+
+        /* Reusable Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styling & Animations */
+        section {
+            padding: 4rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSection 0.8s forwards;
+        }
+        
+        section:nth-of-type(1) { animation-delay: 0.4s; }
+        section:nth-of-type(2) { animation-delay: 0.6s; }
+        section:nth-of-type(3) { animation-delay: 0.8s; }
+
+        @keyframes fadeInSection {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1, h2, h3 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; text-align: center; }
+        p { margin-bottom: 1rem; }
+
+        /* Header / Main Area */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 50vh;
+            min-height: 300px;
+            color: var(--white-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            animation: fadeInSection 0.8s forwards;
+            animation-delay: 0.2s;
+        }
+
+        .hero h1 {
+            color: var(--white-color);
+            font-size: 4rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero .slogan {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .cta-button:hover {
+            background-color: #e68a00;
+            border-color: #e68a00;
+            transform: scale(1.05);
+        }
+        
+        /* About Us Section */
+        #about {
+            background-color: var(--light-color);
+        }
+        
+        .about-content {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .about-content img.about-image {
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Services Section */
+        #services .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: var(--white-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.15);
+        }
+        
+        /* MODIFIED: Styling for EMBEDDED SVG icons */
+        .service-card .icon {
+            margin-bottom: 1rem;
+            height: 60px;
+            color: var(--secondary-color); /* Sets the icon color */
+        }
+
+        .service-card .icon svg {
+           height: 100%;
+           width: auto;
+           fill: currentColor; /* SVG inherits the color from its parent */
+        }
+        
+        .service-card h3 {
+             color: var(--primary-color);
+             font-size: 1.5rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+        }
+
+        #contact h2 {
+            color: var(--white-color);
+        }
+        
+        .contact-info {
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        
+        .contact-info a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .contact-info a:hover {
+            opacity: 0.8;
+        }
+
+        /* Bottom Navigation Menu */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--menu-fallback-bg);
+            background-image: url('https://www.transparenttextures.com/patterns/diamond-plate.png');
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            border-top: 3px solid var(--secondary-color);
+        }
+
+        .bottom-nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.5rem 0;
+            margin: 0;
+        }
+
+        .bottom-nav a {
+            color: var(--white-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border-radius: 8px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+
+        .bottom-nav a:hover {
+            background-color: rgba(0, 0, 0, 0.25);
+        }
+        
+        /* MODIFIED: Styling for EMBEDDED SVG icons in nav */
+        .nav-icon {
+            height: 24px;
+            margin-bottom: 0.3rem;
+            color: var(--white-color); /* Sets the icon color */
+        }
+        .nav-icon svg {
+             height: 100%;
+             width: auto;
+             fill: currentColor; /* SVG inherits the color from its parent */
+        }
+
+
+        /* Responsive Design */
+        @media(max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 3rem; }
+            .hero .slogan { font-size: 1.2rem; }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-content img.about-image {
+                max-width: 80%;
+                margin-bottom: 1rem;
+            }
+
+            .bottom-nav a {
+                font-size: 0.7rem;
+                padding: 0.5rem;
+            }
+            .nav-icon { height: 20px; }
+        }
+        
+        @media(max-width: 480px) {
+             .container { padding: 0 1rem; }
+             h1 { font-size: 2.2rem; }
+             h2 { font-size: 2rem; }
+             section { padding: 3rem 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero" id="home">
+        <div class="container">
+            <h1>Handy Dandy</h1>
+            <p class="slogan">One call, we fix it all. Quality work you can trust.</p>
+            <a href="#contact" class="cta-button">Get a Free Estimate</a>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h2>Our Story</h2>
+            <div class="about-content">
+                 <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Friendly handyman smiling" class="about-image">
+                <div>
+                    <p>Welcome to Handy Dandy! We started this company with a simple mission: to provide reliable, high-quality handyman services to our community. Frustrated by the lack of dependable professionals for small to medium-sized home projects, our founder, John Dandy, decided to build a business based on trust, craftsmanship, and excellent customer service.</p>
+                    <p>With over 15 years of experience in various trades, we pride ourselves on our attention to detail and our commitment to getting the job done right the first time. Your home is your most important asset, and we treat it with the care and respect it deserves.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <!-- Service 1: General Repairs -->
+                <div class="service-card">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M13.82,10.68,10.68,13.82,4.05,7.19,7.19,4.05m5.18-1.42L10.63,1.36a2,2,0,0,0-2.83,0L1.36,7.79a2,2,0,0,0,0,2.83l7.07,7.07a2,2,0,0,0,2.83,0l6.43-6.43a2,2,0,0,0,0-2.83M22,12.55a8.5,8.5,0,0,1-13.89,6.9l-3-3.05,1.41-1.41,3.06,3.06a6.5,6.5,0,0,0,9.19-9.19Z"/></svg>
+                    </div>
+                    <h3>General Repairs</h3>
+                    <p>From leaky faucets and drywall patches to fixing squeaky doors, we handle all the small repairs that make a big difference.</p>
+                </div>
+                <!-- Service 2: Painting -->
+                <div class="service-card">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M19,11h-3V9h3m-5,0H9v2h5M21,7H3A2,2,0,0,0,1,9v10a2,2,0,0,0,2,2h18a2,2,0,0,0,2-2V9a2,2,0,0,0-2-2M7,3H5V5H7m4,0H9V5h2m4,0h-2V5h2m4,0h-2V5h2Z"/></svg>
+                    </div>
+                    <h3>Painting & Finishing</h3>
+                    <p>Need a fresh coat of paint? We provide professional interior and exterior painting services for a flawless finish.</p>
+                </div>
+                <!-- Service 3: Installations -->
+                <div class="service-card">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M12,2A7,7,0,0,0,5,9c0,2.38,1.19,4.47,3,5.74V17a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V14.74c1.81-1.27,3-3.36,3-5.74A7,7,0,0,0,12,2M9,21a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1v-1H9v1Z"/></svg>
+                    </div>
+                    <h3>Installations</h3>
+                    <p>We install light fixtures, ceiling fans, shelves, faucets, and assemble all types of flat-pack furniture.</p>
+                </div>
+                <!-- Service 4: Outdoor Work -->
+                <div class="service-card">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M21.9,13.62A5.43,5.43,0,0,1,18,17.5a5.5,5.5,0,0,1-5.5-5.5,5.34,5.34,0,0,1,3.22-4.95L12,2,2.83,11.17,5.66,14l.71-.71-2.48-2.48,7.3-7.3L16,8.23V6.5a3.5,3.5,0,0,0-7,0v2.09L4.41,13.18l-.71.71L12,22l8.28-8.28.71.71.35-.35"/></svg>
+                    </div>
+                    <h3>Outdoor & Yard Work</h3>
+                    <p>Services include fence repair, deck maintenance, pressure washing, and general garden tidy-ups.</p>
+                </div>
+                 <!-- Service 5: Mounting -->
+                <div class="service-card">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M20,2H4A2,2,0,0,0,2,4v16a2,2,0,0,0,2,2h16a2,2,0,0,0,2-2V4a2,2,0,0,0-2-2M4,4h16V18H4V4m2,12h12v2H6v-2m4.5-6.21L14,14l3.5-4.5,2.5,3.01V6H6v6.12l2.5-3.33Z"/></svg>
+                    </div>
+                    <h3>Mounting & Hanging</h3>
+                    <p>Securely hang your TVs, mirrors, picture frames, and curtains to perfection.</p>
+                </div>
+                 <!-- Service 6: And More -->
+                <div class="service-card">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M12,2A10,10,0,0,0,2,12a10,10,0,0,0,10,10,10,10,0,0,0,10-10A10,10,0,0,0,12,2m0,18a8,8,0,0,1-8-8,8,8,0,0,1,8-8,8,8,0,0,1,8,8,8,8,0,0,1-8,8m4-9h-3V8h-2v3H8v2h3v3h2v-3h3Z"/></svg>
+                    </div>
+                    <h3>And Much More!</h3>
+                    <p>Have a custom project in mind? Don't hesitate to ask! We love a new challenge.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-info">
+                <p>Ready to start your next home project? Contact us today!</p>
+                <p><strong>Phone:</strong> <a href="tel:123-456-7890">(123) 456-7890</a></p>
+                <p><strong>Email:</strong> <a href="mailto:contact@handydandy.com">contact@handydandy.com</a></p>
+                <p><strong>Service Area:</strong> Your City & Surrounding Suburbs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Navigation Menu -->
+    <nav class="bottom-nav">
+        <ul>
+            <li><a href="#home">
+                <span class="nav-icon">
+                    <svg viewBox="0 0 24 24"><path d="M10,20v-6h4v6h5v-8h3L12,3,2,12h3v8h5Z"/></svg>
+                </span>
+                <span class="nav-text">Home</span>
+            </a></li>
+            <li><a href="#about">
+                <span class="nav-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12,2a5,5,0,0,1,5,5,5,5,0,0,1-5,5,5,5,0,0,1-5-5,5,5,0,0,1,5-5m0,2a3,3,0,0,0-3,3,3,3,0,0,0,3,3,3,3,0,0,0,3-3,3,3,0,0,0-3-3M6,17.15c.31-1.13,1.66-2.43,4.05-2.85C11.1,14.07,12,14,12,14c.9,0,1.9,.07,2.95,.3,2.39,.42,3.74,1.72,4.05,2.85C18.44,19.3,16.5,22,12,22c-4.5,0-6.44-2.7-6.9-4.85Z"/></svg>
+                </span>
+                <span class="nav-text">About</span>
+            </a></li>
+            <li><a href="#services">
+                <span class="nav-icon">
+                    <svg viewBox="0 0 24 24"><path d="M13.82,10.68,10.68,13.82,4.05,7.19,7.19,4.05m5.18-1.42L10.63,1.36a2,2,0,0,0-2.83,0L1.36,7.79a2,2,0,0,0,0,2.83l7.07,7.07a2,2,0,0,0,2.83,0l6.43-6.43a2,2,0,0,0,0-2.83M22,12.55a8.5,8.5,0,0,1-13.89,6.9l-3-3.05,1.41-1.41,3.06,3.06a6.5,6.5,0,0,0,9.19-9.19Z"/></svg>
+                </span>
+                <span class="nav-text">Services</span>
+            </a></li>
+            <li><a href="#contact">
+                 <span class="nav-icon">
+                    <svg viewBox="0 0 24 24"><path d="M4,8l8,5,8-5V6l-8,5-8-5m16-2H4A2,2,0,0,0,2,6V18a2,2,0,0,0,2,2H20a2,2,0,0,0,2-2V6a2,2,0,0,0-2-2Z"/></svg>
+                 </span>
+                <span class="nav-text">Contact</span>
+            </a></li>
+        </ul>
+    </nav>
+
+</body>
+</html>
