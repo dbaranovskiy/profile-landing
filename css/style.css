@@ -27,7 +27,7 @@ body {
     background-color: var(--white-color);
     color: var(--dark-color);
     line-height: 1.6;
-    padding-bottom: 70px;
+    padding-bottom: 70px; /* Default for mobile */
 }
 
 /* Reusable Container */
@@ -233,12 +233,12 @@ p { margin-bottom: 1rem; font-family: 'Roboto', sans-serif; font-weight: 300;} /
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 100%; /* Default for mobile */
     background-color: var(--menu-fallback-bg);
     background-image: url('https://www.transparenttextures.com/patterns/diamond-plate.png');
     box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
     z-index: 1000;
-    border-top: 3px solid var(--secondary-color);
+    border-top: 3px solid var(--secondary-color); /* Default for mobile */
 }
 
 .bottom-nav ul {
@@ -282,6 +282,59 @@ p { margin-bottom: 1rem; font-family: 'Roboto', sans-serif; font-weight: 300;} /
 
 
 /* Responsive Design */
+
+/* Desktop styles for navigation */
+@media (min-width: 769px) {
+    body {
+        padding-left: 80px; /* Adjust body padding to make space for the left nav */
+        padding-bottom: 0; /* Remove bottom padding for desktop */
+    }
+
+    .bottom-nav {
+        width: 80px; /* Fixed width for left nav */
+        height: 100%; /* Full height */
+        top: 0;
+        left: 0;
+        bottom: auto; /* Override bottom: 0 */
+        border-top: none; /* Remove top border */
+        border-right: 3px solid var(--secondary-color); /* Add right border */
+        box-shadow: 2px 0 10px rgba(0,0,0,0.3); /* Adjust shadow */
+    }
+
+    .bottom-nav ul {
+        flex-direction: column; /* Stack items vertically */
+        height: 100%;
+        justify-content: center; /* Center items vertically */
+        padding: 1rem 0;
+    }
+
+    .bottom-nav li {
+        margin: 1rem 0; /* Add vertical margin between items */
+    }
+
+    .bottom-nav a {
+        font-size: 0.9rem; /* Slightly larger font for desktop */
+        padding: 0.8rem 0.5rem; /* Adjust padding */
+    }
+
+    .nav-icon {
+        height: 30px; /* Larger icons for desktop */
+        margin-bottom: 0.5rem; /* More space below icon */
+    }
+
+    .nav-text {
+        display: block; /* Ensure text is visible */
+    }
+
+    /* Adjust container for desktop to not overlap with nav */
+    .container {
+        max-width: calc(1100px - 80px); /* Reduce max-width by nav width */
+        margin-left: auto; /* Center content within remaining space */
+        margin-right: auto;
+    }
+}
+
+/* Mobile styles (max-width: 768px) - keep existing bottom nav behavior */
 @media(max-width: 768px) {
     h1 { font-size: 3rem; }
     h2 { font-size: 2.2rem; }
