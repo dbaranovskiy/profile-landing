@@ -8,7 +8,7 @@
 ## Development Setup:
 - **Text Editor:** VS Code (as indicated by the environment details).
 - **Browser:** Any modern web browser for testing and viewing the site.
-- **Local Server (Optional):** A simple local HTTP server (e.g., `Live Server` VS Code extension, Python's `http.server`, Node.js `serve`) can be used for development to handle relative paths correctly, though not strictly necessary for basic static files.
+- **Local Server:** The project is typically served locally using the VS Code Live Server extension at `http://127.0.0.1:5500/`. This URL should be used for checking changes during development.
 
 ## Technical Constraints:
 - **No Backend:** The project is purely client-side. Any dynamic features (like contact forms) must rely on third-party services.

@@ -8,7 +8,7 @@
 
 ## What's left to build:
 - **Content Refinement:** Review and refine all text content (e.g., service descriptions, about section) for clarity, conciseness, and SEO.
-- **Image Optimization:** Ensure all images in the `assets/` directory are optimized for web performance.
+- **Image Optimization:** Ensure all images in the `assets/` directory are optimized for web performance (e.g., compressed, appropriate format like WebP). The `index.html` has been updated to use a local image path, but the actual image file needs to be placed in `assets/` and optimized.
 - **Advanced Interactivity:** If desired, add more complex JavaScript functionality (e.g., a working contact form integration with a third-party service, animations, carousels).
 - **Accessibility Improvements:** Conduct an accessibility audit and implement improvements (e.g., ARIA attributes, keyboard navigation).
 - **SEO Optimization:** Implement meta tags, structured data, and other SEO best practices.
