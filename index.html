@@ -19,11 +19,12 @@
   "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"18:00"}]
 }
 </script>
-<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <style type="text/tailwindcss">
       :root {
         --primary-color: #2597f4;
@@ -32,14 +33,17 @@
         --text-light: #60778a;
         --background-white: #ffffff;
       }
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         font-family: "Plus Jakarta Sans", sans-serif;
       }
     </style>
 </head>
-<body class="bg-[var(--background-white)] text-[var(--text-dark)]">
-<div class="relative flex size-full min-h-screen flex-col overflow-x-hidden">
-<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--secondary-color)] bg-white/80 px-4 py-3 backdrop-blur-md sm:px-10">
+<body class="bg-[var(--background-white)] text-[var(--text-dark)] overflow-x-hidden" x-data="{ mobileMenuOpen: false }">
+<div class="relative flex size-full min-h-screen flex-col" >
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--secondary-color)] bg-white/80 px-4 py-3 backdrop-blur-md sm:px-10" @keydown.escape.window="mobileMenuOpen = false">
 <div class="flex items-center gap-3">
 <div class="text-2xl text-[var(--primary-color)]">
 <svg class="size-8" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -49,26 +53,37 @@
 <h2 class="text-xl font-bold leading-tight tracking-tight text-[var(--text-dark)]">Handy Dandy</h2>
 </div>
 <nav class="hidden items-center gap-8 md:flex">
-<a class="text-sm font-medium text-[var(--text-dark)] transition-colors hover:text-[var(--primary-color)]" href="#services">Services</a>
-<a class="text-sm font-medium text-[var(--text-dark)] transition-colors hover:text-[var(--primary-color)]" href="#projects">Projects</a>
-<a class="text-sm font-medium text-[var(--text-dark)] transition-colors hover:text-[var(--primary-color)]" href="#testimonials">Testimonials</a>
-<a class="text-sm font-medium text-[var(--text-dark)] transition-colors hover:text-[var(--primary-color)]" href="#contact">Contact</a>
+<a class="rounded-md text-sm font-medium text-[var(--text-dark)] transition-colors hover:text-[var(--primary-color)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-color)]" href="#services">Services</a>
+<a class="rounded-md text-sm font-medium text-[var(--text-dark)] transition-colors hover:text-[var(--primary-color)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-color)]" href="#projects">Projects</a>
+<a class="rounded-md text-sm font-medium text-[var(--text-dark)] transition-colors hover:text-[var(--primary-color)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-color)]" href="#testimonials">Testimonials</a>
+<a class="rounded-md text-sm font-medium text-[var(--text-dark)] transition-colors hover:text-[var(--primary-color)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-color)]" href="#contact-form">Contact</a>
 </nav>
-<button class="hidden min-w-[100px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[var(--primary-color)] px-4 py-2 text-sm font-bold text-white transition-transform hover:scale-105 sm:flex">
+<a href="#contact-form" class="hidden min-w-[100px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[var(--primary-color)] px-4 py-2 text-sm font-bold text-white transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-color)] focus-visible:ring-offset-2 sm:flex">
 <span>Book Now</span>
-</button>
-<button class="md:hidden">
-<svg class="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+<button class="rounded-md p-1 md:hidden" @click="mobileMenuOpen = !mobileMenuOpen" aria-controls="mobile-menu" :aria-expanded="mobileMenuOpen">
+<span class="sr-only">Open main menu</span>
+<svg class="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" x-show="!mobileMenuOpen"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<svg class="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" x-show="mobileMenuOpen" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
 </button>
 </header>
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="absolute left-0 top-16 z-40 w-full border-b border-solid border-[var(--secondary-color)] bg-white/95 p-4 backdrop-blur-md md:hidden" x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" style="display: none;" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4">
+<nav class="flex flex-col gap-4">
+<a class="rounded-md px-2 py-1 text-base font-medium text-[var(--text-dark)] transition-colors hover:text-[var(--primary-color)]" href="#services" @click="mobileMenuOpen = false">Services</a>
+<a class="rounded-md px-2 py-1 text-base font-medium text-[var(--text-dark)] transition-colors hover:text-[var(--primary-color)]" href="#projects" @click="mobileMenuOpen = false">Projects</a>
+<a class="rounded-md px-2 py-1 text-base font-medium text-[var(--text-dark)] transition-colors hover:text-[var(--primary-color)]" href="#testimonials" @click="mobileMenuOpen = false">Testimonials</a>
+<a class="rounded-md px-2 py-1 text-base font-medium text-[var(--text-dark)] transition-colors hover:text-[var(--primary-color)]" href="#contact-form" @click="mobileMenuOpen = false">Contact</a>
+</nav>
+</div>
 <main class="flex flex-1 flex-col">
 <section class="relative flex min-h-[60vh] items-end justify-start bg-cover bg-center px-4 py-16 text-white md:px-20 lg:px-40" style='background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6) 20%, rgba(0, 0, 0, 0.1) 80%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuB-F8v-JqqIRBr4pALgMMS677UOvKkCrWuuLQDd_ohEvVaAHkjASgsk6X8PnxH3wDxpNDzeRQc5tWPgJtQEmdZgn2yVwe8CRzNAvXfFLJTWTBsV2S-VQo-v2Ti_7NfLoxxhzS9eIApjoTWgoXGC0xipgzVl4ot0b2VxxYvz60ppo22XQ621sm8ruGjMMH9LbM6n7HaNCJZwOD7NjLMdViR3fBK8EC7-q0Q-asyKNS8UCuayrLiXk14AFC53uA4Egc1HQ3JQroTZ8b-8");'>
 <div class="max-w-2xl space-y-6">
 <h1 class="text-4xl font-extrabold leading-tight tracking-tighter drop-shadow-lg md:text-6xl">Handyman & Home Repair in Washington DC, Maryland & Virginia</h1>
 <p class="text-lg font-light drop-shadow-md md:text-xl">From minor repairs to major renovations, we've got you covered. Our skilled team delivers quality craftsmanship and exceptional service.</p>
-<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[var(--primary-color)] px-6 py-3 text-base font-bold text-white shadow-lg transition-transform hover:scale-105">
+<a href="#contact-form" class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[var(--primary-color)] px-6 py-3 text-base font-bold text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
 <span>Book a Consultation</span>
-</button>
+</a>
 </div>
 </section>
 <section class="container mx-auto px-4 py-16 sm:px-6 lg:px-8" id="services">
@@ -108,7 +123,7 @@
 <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
 <div class="group overflow-hidden rounded-lg bg-white shadow-md">
 <div class="aspect-video w-full overflow-hidden">
-<div class="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBoco6g_6B9xWiUAonXur84cwTRxZ1eplEl0cFGlHrLrGb-Ff_YtUanzPgAzTtWlSOYDyanGHpzo_vds9r0qESFNdpww8aRF_bPASYnTCG7caKTzpsyRjrPrgBa07EJC8RuVDS75gnneOimDWYZJDAfvDCiAT887YLngTjdi0RiEzgkNblmD7JxryqLGChvMQPEwG5qCpROEU8wU4Kq5gDauoGTd6MVf6WdVmfqZ5AdS5GDOO7LwHdV8CzAYnoPy5LaXKyp7P0rJvny");'></div>
+<img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoco6g_6B9xWiUAonXur84cwTRxZ1eplEl0cFGlHrLrGb-Ff_YtUanzPgAzTtWlSOYDyanGHpzo_vds9r0qESFNdpww8aRF_bPASYnTCG7caKTzpsyRjrPrgBa07EJC8RuVDS75gnneOimDWYZJDAfvDCiAT887YLngTjdi0RiEzgkNblmD7JxryqLGChvMQPEwG5qCpROEU8wU4Kq5gDauoGTd6MVf6WdVmfqZ5AdS5GDOO7LwHdV8CzAYnoPy5LaXKyp7P0rJvny" alt="Modern kitchen with new appliances and cabinetry" loading="lazy" width="400" height="225" />
 </div>
 <div class="p-4">
 <p class="text-base font-semibold text-[var(--text-dark)]">Kitchen Renovation</p>
@@ -117,7 +132,7 @@
 </div>
 <div class="group overflow-hidden rounded-lg bg-white shadow-md">
 <div class="aspect-video w-full overflow-hidden">
-<div class="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDq_izBLBRuw3r4AcY9ESQvJzf8mRq5CnuLtK8zo4V5Acgwg6ZBK1E0l29Mdx1vmGkVP2LYfv-Gs2gvNVp2gFOaJV8syrPw2Dx5JxNh-rD9Fp3VOmDdq3nIBw1KWiosTYTvlP1rIYAzijt_9JIkuh8o3YNp7YJ6FfkUzC-hjevlgKDYXcmpamP4dWeTgHXCl_DFedUCfdkRQ4up0xwk2D-BDqxb7VXD_1xzJHUFC-_fBOJqYNt3nFB8-pwTFyphmOr8bb-g7_F63HKq");'></div>
+<img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq_izBLBRuw3r4AcY9ESQvJzf8mRq5CnuLtK8zo4V5Acgwg6ZBK1E0l29Mdx1vmGkVP2LYfv-Gs2gvNVp2gFOaJV8syrPw2Dx5JxNh-rD9Fp3VOmDdq3nIBw1KWiosTYTvlP1rIYAzijt_9JIkuh8o3YNp7YJ6FfkUzC-hjevlgKDYXcmpamP4dWeTgHXCl_DFedUCfdkRQ4up0xwk2D-BDqxb7VXD_1xzJHUFC-_fBOJqYNt3nFB8-pwTFyphmOr8bb-g7_F63HKq" alt="Contemporary bathroom with updated fixtures and tiling" loading="lazy" width="400" height="225" />
 </div>
 <div class="p-4">
 <p class="text-base font-semibold text-[var(--text-dark)]">Bathroom Remodel</p>
@@ -126,7 +141,7 @@
 </div>
 <div class="group overflow-hidden rounded-lg bg-white shadow-md">
 <div class="aspect-video w-full overflow-hidden">
-<div class="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCNBD7xyfGblFvIPiWCrDH-rKSkwdl7A2DDF8WjfLn_NXquBIm39V8W0NNBvJpxHb9Ia07xQgIyymREn3O9g5ZyyjuK8ELB7eEyMvd7-BvTXZQquy7Qxc-9srbS0UUgwQeA_XIMaQMQC98gLHq7Y8ntk8x2QixgLu3K4cp2-QVeyGAolCgsctg6BCT5w52k7pSEcIzqhxhoNblvliWKHAZ7ZdPTKeKkRc6zSAupEOtBhrwmiahJAX_GgU9aRRYvy4DVgFyY-32_B39s");'></div>
+<img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNBD7xyfGblFvIPiWCrDH-rKSkwdl7A2DDF8WjfLn_NXquBIm39V8W0NNBvJpxHb9Ia07xQgIyymREn3O9g5ZyyjuK8ELB7eEyMvd7-BvTXZQquy7Qxc-9srbS0UUgwQeA_XIMaQMQC98gLHq7Y8ntk8x2QixgLu3K4cp2-QVeyGAolCgsctg6BCT5w52k7pSEcIzqhxhoNblvliWKHAZ7ZdPTKeKkRc6zSAupEOtBhrwmiahJAX_GgU9aRRYvy4DVgFyY-32_B39s" alt="Stylish living room with fresh paint and new flooring" loading="lazy" width="400" height="225" />
 </div>
 <div class="p-4">
 <p class="text-base font-semibold text-[var(--text-dark)]">Living Room Update</p>
@@ -135,7 +150,7 @@
 </div>
 <div class="group overflow-hidden rounded-lg bg-white shadow-md">
 <div class="aspect-video w-full overflow-hidden">
-<div class="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD1lX5qMjcabtMdy1yQ5sgotV4KLQDIDTiDBbdBrvkxs5aEHZx-VkuUTDOBUm2NaKr_iB5kQQ38gN1MsLCK6xFy_B3AB-5s_wIJzBpXphNgzlQ9qVzh6xZQkGvlAP7xteug5CYwfoj0i8erJ6tUF2acYQHVC3kT4Z7rM9iOanHjvnshGatNmMY0Pg-JiBDIihditNeHGTN1JknfQcJOukPuxsnvzjt-Z2S06_FSr4h_JRAG9fig_6E6RmyW80aN_Q-SwhorM475So-B");'></div>
+<img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1lX5qMjcabtMdy1yQ5sgotV4KLQDIDTiDBbdBrvkxs5aEHZx-VkuUTDOBUm2NaKr_iB5kQQ38gN1MsLCK6xFy_B3AB-5s_wIJzBpXphNgzlQ9qVzh6xZQkGvlAP7xteug5CYwfoj0i8erJ6tUF2acYQHVC3kT4Z7rM9iOanHjvnshGatNmMY0Pg-JiBDIihditNeHGTN1JknfQcJOukPuxsnvzjt-Z2S06_FSr4h_JRAG9fig_6E6RmyW80aN_Q-SwhorM475So-B" alt="Beautiful outdoor deck for entertaining and relaxation" loading="lazy" width="400" height="225" />
 </div>
 <div class="p-4">
 <p class="text-base font-semibold text-[var(--text-dark)]">Outdoor Decking</p>
@@ -150,12 +165,12 @@
 <h2 class="text-3xl font-bold tracking-tight text-[var(--text-dark)] sm:text-4xl">Customer Reviews</h2>
 </div>
 <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-<div class="rounded-lg border border-[var(--secondary-color)] bg-white p-6 shadow-sm">
+<div class="flex flex-col rounded-lg border border-[var(--secondary-color)] bg-white p-6 shadow-sm">
 <div class="flex items-start gap-4">
 <img alt="Emily Carter" class="size-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhouomGw83sfFfn-8EHDFJjosSARoWxuw3iXd5ZAHWG-QPJ--U_U24nca1lYZFxoqc7fcJ02wMzN9SwXkt7PKeMZSMXcXcjzjYg_vXdDyuBwAtBYX4dNkQhqdF5s6PgvDrlDRQl1_cG1WLsH6oPk0qdEFNSOCfJepzjFegbhzbqKL4Vr1fxwqZhihvDaJdYhVzg-0pK892Qgkv7kbzOshK5chs9HmTiO3g-gyANwWzA-VLMNeX8ACHGSC_UzNjdLdTG3WilsSrKxls" loading="lazy" width="48" height="48" />
 <div>
 <p class="font-semibold">Emily Carter</p>
-<div class="mt-1 flex items-center text-yellow-400">
+<div class="mt-1 flex items-center text-yellow-400" aria-label="5 out of 5 stars">
 <svg class="size-5" fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path></svg>
 <svg class="size-5" fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path></svg>
 <svg class="size-5" fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path></svg>
@@ -164,14 +179,14 @@
 </div>
 </div>
 </div>
-<p class="mt-4 text-base text-[var(--text-light)]">"Handy Dandy transformed my kitchen! The team was professional, efficient, and the quality of work exceeded my expectations. Highly recommend!"</p>
+<p class="mt-4 flex-1 text-base text-[var(--text-light)]">"Handy Dandy transformed my kitchen! The team was professional, efficient, and the quality of work exceeded my expectations. Highly recommend!"</p>
 </div>
-<div class="rounded-lg border border-[var(--secondary-color)] bg-white p-6 shadow-sm">
+<div class="flex flex-col rounded-lg border border-[var(--secondary-color)] bg-white p-6 shadow-sm">
 <div class="flex items-start gap-4">
 <img alt="David Thompson" class="size-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlAIEw_9F2weBKFM6diPOg6EzjkiThGIZpgyputsudM0x2NOQx80bLSCBSNsJuCvtL5UtaC0xjuWEwsFI7HqyQWTlw4JU0_cdqmHK5-Yhurmvk-EeKzlctlRwV80xfp-IB8pkIanzC56TLGWplTeaJgXWJQOG8zIH87fOa-ItI7D7WzsS5E5B2_pWuTS98Lf5Yda3SeB2Fm5frD01BstqtklORu-cMtE38ufn52lkGg-wCWsA9kQ7jX4fkIEY9Y8fpRCEfAEdeOTac" loading="lazy" width="48" height="48" />
 <div>
 <p class="font-semibold">David Thompson</p>
-<div class="mt-1 flex items-center text-yellow-400">
+<div class="mt-1 flex items-center text-yellow-400" aria-label="4 out of 5 stars">
 <svg class="size-5" fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path></svg>
 <svg class="size-5" fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path></svg>
 <svg class="size-5" fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path></svg>
@@ -180,14 +195,14 @@
 </div>
 </div>
 </div>
-<p class="mt-4 text-base text-[var(--text-light)]">"I hired Handy Dandy for a bathroom remodel, and while there were a few minor hiccups, the final result was fantastic. The team was responsive and addressed my concerns promptly."</p>
+<p class="mt-4 flex-1 text-base text-[var(--text-light)]">"I hired Handy Dandy for a bathroom remodel, and while there were a few minor hiccups, the final result was fantastic. The team was responsive and addressed my concerns promptly."</p>
 </div>
-<div class="rounded-lg border border-[var(--secondary-color)] bg-white p-6 shadow-sm">
+<div class="flex flex-col rounded-lg border border-[var(--secondary-color)] bg-white p-6 shadow-sm">
 <div class="flex items-start gap-4">
 <img alt="Sarah Miller" class="size-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpT97wRqWPL8yGPROQqxpeFs9jn2t2hyIDAu0H3gexSrghHUULe1AO_lNJzPMwRoZUhBl3kz6-ELwP0hyaxN3DrVVOXXvP6IIeG8WMUzBI6YPycNcZV8qGtagwbSkxyFQFpt2qjovGVBL5DoXXnPHAwz2Vg_d3kGo9JeEA5AAAni0ZzLEyX5pH4p5yljRugu1nPzra1VkIHfNOfQwv69pgGJi4XnNBf7wNsETOamZJj5PliFc421K5ylNlnIR0IMTlQhhgRJUSBtkY" loading="lazy" width="48" height="48" />
 <div>
 <p class="font-semibold">Sarah Miller</p>
-<div class="mt-1 flex items-center text-yellow-400">
+<div class="mt-1 flex items-center text-yellow-400" aria-label="5 out of 5 stars">
 <svg class="size-5" fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path></svg>
 <svg class="size-5" fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path></svg>
 <svg class="size-5" fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path></svg>
@@ -196,13 +211,38 @@
 </div>
 </div>
 </div>
-<p class="mt-4 text-base text-[var(--text-light)]">"From start to finish, Handy Dandy provided exceptional service. They were punctual, courteous, and did an amazing job updating my living room. I'm thrilled with the results!"</p>
+<p class="mt-4 flex-1 text-base text-[var(--text-light)]">"From start to finish, Handy Dandy provided exceptional service. They were punctual, courteous, and did an amazing job updating my living room. I'm thrilled with the results!"</p>
 </div>
 </div>
 </section>
-<section class="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+<section class="bg-[var(--secondary-color)] py-16" id="contact-form">
+<div class="container mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
 <div class="text-center">
 <h2 class="text-3xl font-bold tracking-tight text-[var(--text-dark)] sm:text-4xl">Request a Free Estimate</h2>
+<p class="mt-4 text-lg text-[var(--text-light)]">Fill out the form below and we'll get back to you shortly.</p>
+</div>
+<div class="mt-12">
+<form action="#" method="POST" class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+<div>
+<label for="full-name" class="block text-sm font-medium text-[var(--text-light)]">Full name</label>
+<div class="mt-1"><input type="text" name="full-name" id="full-name" autocomplete="name" class="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)]" /></div>
+</div>
+<div>
+<label for="email" class="block text-sm font-medium text-[var(--text-light)]">Email</label>
+<div class="mt-1"><input id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)]" /></div>
+</div>
+<div class="sm:col-span-2">
+<label for="phone-number" class="block text-sm font-medium text-[var(--text-light)]">Phone Number</label>
+<div class="mt-1"><input type="text" name="phone-number" id="phone-number" autocomplete="tel" class="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)]" /></div>
+</div>
+<div class="sm:col-span-2">
+<label for="message" class="block text-sm font-medium text-[var(--text-light)]">Message</label>
+<div class="mt-1"><textarea id="message" name="message" rows="4" class="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)]"></textarea></div>
+</div>
+<div class="sm:col-span-2">
+<button type="submit" class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-[var(--primary-color)] px-6 py-3 text-base font-bold text-white shadow-sm transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-2">Submit Request</button>
+</div>
+</form>
 </div>
 </section>
 </main>
@@ -217,16 +257,15 @@
 <p class="text-center text-sm md:text-left">© 2025 Handy Dandy. All rights reserved.</p>
 </div>
 <nav class="flex flex-wrap justify-center gap-x-6 gap-y-4 text-sm font-medium">
-<a class="transition-colors hover:text-white" href="#services">Services</a>
-<a class="transition-colors hover:text-white" href="#projects">Projects</a>
-<a class="transition-colors hover:text-white" href="#testimonials">Testimonials</a>
-<a class="transition-colors hover:text-white" href="#">About Us</a>
-<a class="transition-colors hover:text-white" href="#">Contact</a>
+<a class="rounded-md transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white" href="#services">Services</a>
+<a class="rounded-md transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white" href="#projects">Projects</a>
+<a class="rounded-md transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white" href="#testimonials">Testimonials</a>
+<a class="rounded-md transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white" href="#contact-form">Contact</a>
 </nav>
 <div class="flex justify-center gap-6 text-2xl">
-<a class="transition-colors hover:text-white" href="#"><svg fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z"></path></svg></a>
-<a class="transition-colors hover:text-white" href="#"><svg fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z"></path></svg></a>
-<a class="transition-colors hover:text-white" href="#"><svg fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"></path></svg></a>
+<a class="rounded-md transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white" href="#" aria-label="Facebook"><svg fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z"></path></svg></a>
+<a class="rounded-md transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white" href="#" aria-label="Twitter"><svg fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z"></path></svg></a>
+<a class="rounded-md transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white" href="#" aria-label="Instagram"><svg fill="currentColor" height="1em" viewBox="0 0 256 256" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"></path></svg></a>
 </div>
 </div>
 </div>
