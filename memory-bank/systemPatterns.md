@@ -1,25 +1,28 @@
 # System Patterns
 
 ## System Architecture:
-The "Handy Dandy" project follows a simple, client-side architecture. It is a static website composed of HTML, CSS, and JavaScript files, designed for direct deployment on a web server or CDN. There is no backend component or database.
+The "Handy Dandy" project follows a simple, client-side architecture. It is a static website composed of HTML, Tailwind CSS, and Alpine.js, designed for direct deployment on a web server or CDN. There is no backend component or database.
 
 ## Key Technical Decisions:
 - **Static Site:** Chosen for simplicity, performance, and ease of deployment. No server-side processing is required.
-- **Vanilla HTML, CSS, JavaScript:** Avoids complex frameworks or libraries for minimal overhead and maximum compatibility. This also makes the project lightweight and easy to maintain.
-- **Responsive Design:** Utilizes CSS media queries and flexible layouts to ensure optimal viewing across various devices.
+- **Tailwind CSS:** Utilized for a utility-first CSS approach, enabling rapid UI development and consistent styling.
+- **Alpine.js:** Integrated for lightweight, declarative JavaScript behavior directly within the HTML, minimizing the need for a separate `main.js` file for simple interactivity.
+- **Responsive Design:** Achieved through Tailwind's responsive utilities and flexible layouts to ensure optimal viewing across various devices.
 
 ## Design Patterns in Use:
-- **Modular CSS:** CSS is organized into logical sections (e.g., `style.css` for general styling).
-- **Separation of Concerns:** HTML for structure, CSS for presentation, and JavaScript for interactivity are kept in separate files.
+- **Utility-First CSS:** Leveraging Tailwind CSS classes directly in HTML for styling.
+- **Declarative JavaScript:** Using Alpine.js for component-like behavior with minimal boilerplate.
+- **Separation of Concerns (Modified):** While HTML, CSS, and JS are conceptually separate, Tailwind and Alpine integrate styling and behavior directly into the HTML for efficiency.
 
 ## Component Relationships:
-- `index.html`: The main entry point, containing the header (hero section), "Our Story" (about), "Our Services" (services grid), and "Get In Touch" (contact) sections. It links to CSS and JavaScript files.
-- `css/style.css`: Contains all global styles, responsive design rules, and styling for specific sections and components like service cards and navigation.
-- `js/main.js`: Handles any interactive elements or dynamic content loading (currently minimal, primarily for navigation).
-- `assets/`: Directory for images (e.g., the handyman image in the "Our Story" section), fonts, and other media.
+- `index.html`: The main entry point, containing the header (hero section), "Services" (services grid), "Projects", "Testimonials", and "Contact Form" sections. It links to Tailwind CSS and Alpine.js CDNs.
+- **Inline Styles/Scripts:** Tailwind CSS classes and Alpine.js directives are applied directly within `index.html`.
+- `assets/`: Directory for images (e.g., the hero section background image, project images, testimonial avatars), favicon, and other media.
 
 ## Critical Implementation Paths:
-- **Navigation:** The bottom navigation menu (`.bottom-nav`) provides smooth scrolling links to `#home`, `#about`, `#services`, and `#contact` sections.
-- **Call to Action:** The "Get a Free Estimate" button in the hero section links to the `#contact` section.
-- **Service Display:** The `.services-grid` effectively showcases various handyman services using `.service-card` elements with icons and descriptions.
-- **Contact Information:** The `#contact` section clearly presents phone and email contact details.
+- **Navigation:** The main navigation and mobile menu provide smooth scrolling links to `#services`, `#projects`, `#testimonials`, and `#contact-form` sections.
+- **Call to Action:** The "Book Now" button in the header and "Book a Consultation" button in the hero section link to the `#contact-form` section.
+- **Service Display:** The services section (`#services`) effectively showcases various handyman services using `.service-card` elements with SVG icons and descriptions.
+- **Project Showcase:** The projects section (`#projects`) displays various completed works with images and descriptions.
+- **Testimonials:** The testimonials section (`#testimonials`) presents customer reviews.
+- **Contact Form:** The `#contact-form` section provides a form for users to request estimates.

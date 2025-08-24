@@ -2,8 +2,9 @@
 
 ## Technologies Used:
 - **HTML5:** For structuring the content of the web page (`index.html`).
-- **CSS3:** For styling the web page, including layout, colors, typography, and responsiveness (`css/style.css`).
-- **JavaScript (ES6+):** For any interactive elements or dynamic content manipulation (`js/main.js`). Currently, this file appears to be minimal, primarily handling navigation.
+- **Tailwind CSS:** For styling the web page, including layout, colors, typography, and responsiveness. Loaded via CDN.
+- **Alpine.js:** For adding declarative JavaScript behavior to HTML. Loaded via CDN.
+- **JavaScript (ES6+):** For any custom interactive elements or dynamic content manipulation.
 
 ## Development Setup:
 - **Text Editor:** VS Code (as indicated by the environment details).
@@ -16,8 +17,10 @@
 - **Performance:** Keep file sizes minimal (images optimized, CSS/JS minified if deployed) to ensure fast loading times.
 
 ## Dependencies:
-- **External Libraries:** The project currently uses SVG icons embedded directly in the HTML for navigation and service cards. It does not appear to use external JavaScript libraries (like jQuery, React, Vue) or CSS frameworks (like Bootstrap, Tailwind CSS).
-- **Fonts/Icons (Potential):** If custom fonts (e.g., Google Fonts) or external icon libraries (e.g., Font Awesome) were to be used, they would be external dependencies loaded via CDN or self-hosted. Currently, the SVG icons are inline.
+- **Tailwind CSS CDN:** For utility-first CSS styling.
+- **Alpine.js CDN:** For lightweight JavaScript interactivity.
+- **Google Fonts:** "Plus Jakarta Sans" is loaded for typography.
+- **SVG Icons:** Embedded directly in the HTML for navigation and service cards.
 
 ## Tool Usage Patterns:
 - **File System Operations:** `mkdir`, `write_to_file`, `read_file`, `list_files` for managing project structure and content.
