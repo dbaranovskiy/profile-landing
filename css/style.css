@@ -26,7 +26,6 @@ body {
     line-height: 1.6;
     background-color: var(--light-color);
     color: var(--dark-color);
-    padding-bottom: 80px; /* Space for bottom nav on mobile */
 }
 
 .container {
@@ -172,6 +171,50 @@ a {
     margin-bottom: 1rem;
 }
 
+/* Menu Toggle (Hamburger) */
+.menu-toggle {
+    display: block; /* Show on mobile */
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    background-color: var(--dark-color);
+    border: none;
+    border-radius: 5px;
+    z-index: 1002; /* Above nav overlay */
+    cursor: pointer;
+}
+
+.menu-toggle .hamburger {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--white-color);
+    position: relative;
+    transition: background-color 0s 0.3s;
+    margin: auto;
+}
+
+.menu-toggle .hamburger::before,
+.menu-toggle .hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--white-color);
+    transition: transform 0.3s ease, top 0.3s ease, bottom 0.3s ease;
+}
+
+.menu-toggle .hamburger::before {
+    top: -8px;
+}
+
+.menu-toggle .hamburger::after {
+    bottom: -8px;
+}
+
 /* Footer */
 .main-footer {
     background-color: var(--dark-color);
@@ -183,35 +226,57 @@ a {
     width: 100%;
 }
 
+/* Animate to 'X' when nav is open */
+.nav-open .menu-toggle .hamburger {
+    background-color: transparent;
+}
+
+.nav-open .menu-toggle .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.nav-open .menu-toggle .hamburger::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+}
+
 /* Navigation */
 .bottom-nav {
     position: fixed;
-    bottom: 0;
-    left: 0;
+    /* Mobile-first: This is the mobile overlay style */
+    top: 0;
+    right: 0;
     width: 100%;
+    height: 100vh;
     background: url('../img/diamond-plate.png'), var(--menu-fallback-bg);
     background-repeat: repeat;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
     display: flex;
-    justify-content: space-around;
+    flex-direction: column; /* Stack links vertically */
+    justify-content: center; /* Center links vertically */
     align-items: center;
     z-index: 1000;
-    height: 80px;
+    transform: translateX(100%); /* Hide off-screen to the right */
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Show nav when body has .nav-open class */
+.nav-open .bottom-nav {
+    transform: translateX(0);
 }
 
 .bottom-nav a {
     color: var(--white-color);
     text-align: center;
-    padding: 0.5rem 1rem;
+    padding: 1rem 2rem; /* More padding for overlay links */
     transition: background-color 0.3s;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-grow: 1;
-    height: 100%;
-    font-size: 0.8rem;
+    font-size: 1.5rem; /* Larger font for overlay */
     text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    width: 100%; /* Make links take full width */
 }
 
 .bottom-nav a:hover,
@@ -240,19 +305,28 @@ a {
     }
 
     .bottom-nav {
+        /* Override mobile overlay styles for desktop */
+        transform: translateX(0);
         width: var(--nav-width-desktop); /* Fixed width for left nav */
         height: 100%; /* Full height */
         top: 0;
         left: 0;
+        right: auto;
         flex-direction: column; /* Stack items vertically */
         justify-content: flex-start; /* Align to the top */
         padding-top: 2rem;
+        transition: none; /* No transition needed for desktop */
     }
 
     .bottom-nav a {
         width: 100%;
         padding: 1rem 0;
         flex-grow: 0; /* Prevent items from growing */
+        font-size: 0.8rem; /* Revert to smaller font for side nav */
+    }
+
+    .menu-toggle {
+        display: none; /* Hide hamburger on desktop */
     }
 
     .main-footer {
@@ -280,13 +354,4 @@ a {
     .hero h1 { font-size: 3.5rem; }
     .hero .slogan { font-size: 1.2rem; }
 
-    .bottom-nav a {
-        font-size: 0.7rem;
-        padding: 0.5rem;
-    }
-
-    .bottom-nav a svg {
-        width: 24px;
-        height: 24px;
-    }
 }
