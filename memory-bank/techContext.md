@@ -26,3 +26,4 @@
 - **File System Operations:** `mkdir`, `write_to_file`, `read_file`, `list_files` for managing project structure and content.
 - **Browser Interaction:** `browser_action` for testing and verifying the live appearance and functionality of the page.
 - **Command Execution:** `execute_command` for running local development servers or build scripts if they become necessary.
+- **Testing:** When testing the application, always use the remote browser connection at `http://127.0.0.1:5500/index.html`. Ensure the Live Server is started and the browser is connected before initiating tests.

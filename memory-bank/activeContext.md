@@ -19,6 +19,10 @@ Ensuring the memory bank for the "Handy Dandy" handyman service landing page pro
 - Ensuring all core memory bank files are updated to accurately reflect the "Handy Dandy" project's context.
 - The content of these files will continue to evolve as the project progresses and new information becomes available.
 
+## Testing Procedures:
+- Always test this project using the remote browser connection at `http://127.0.0.1:5500/index.html`.
+- Before testing, ensure the browser is connected and the Live Server is started.
+
 ## Important Patterns and Preferences:
 - Adherence to the specified Memory Bank structure and file hierarchy.
 - Documentation should be clear, concise, and easily understandable for future reference.
